@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import voiture.Marque;
@@ -32,6 +33,7 @@ public class VehiculeDAO extends DAO<Vehicule> {
 	@Override
 	public boolean create(Vehicule obj) {
 		// TODO Auto-generated method stub
+		System.out.println("Création véhicule");
 		return false;
 	}
 
@@ -72,7 +74,7 @@ public class VehiculeDAO extends DAO<Vehicule> {
 					result.getString("NOM"),
 					null, // Marque
 					null, // Moteur
-					null, // Options
+					new ArrayList<Option>(), // Options
 					result.getDouble("PRIX")
 				);
 				
@@ -92,8 +94,7 @@ public class VehiculeDAO extends DAO<Vehicule> {
 				/* */
 				result = this.connection.createStatement().executeQuery(
 						"SELECT * FROM OPTION "
-						+ "INNER JOIN VEHICULE_OPTION ON VEHICULE_OPTION.ID_OPTION = OPTION.ID "
-						+ "INNER JOIN VEHICULE ON VEHICULE.ID = VEHICULE_OPTION.ID_VEHICULE AND VEHICULE.ID = " + id);
+						+ "INNER JOIN VEHICULE_OPTION ON VEHICULE_OPTION.ID_OPTION = OPTION.ID AND VEHICULE_OPTION.ID_VEHICULE = " + id);
 				OptionDAO optionDao = new OptionDAO(this.connection);
 				
 				while (result.next()) {

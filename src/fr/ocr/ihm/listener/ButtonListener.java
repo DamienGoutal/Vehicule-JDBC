@@ -4,6 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
+
+import dao.VehiculeDAO;
+import fr.ocr.sql.HsqldbConnection;
+import voiture.Vehicule;
 
 //Notre listener pour le bouton
 public class ButtonListener implements ActionListener {
@@ -30,5 +36,19 @@ public class ButtonListener implements ActionListener {
 		et n'oubliez pas de supprimer toutes les options de ceui-ci...
 		
 		*/
+		
+		id = Integer.parseInt((String) this.table.getValueAt(row, column - 2));
+		
+		VehiculeDAO vehiculeDao = new VehiculeDAO(HsqldbConnection.getInstance());
+		Vehicule vehicule = vehiculeDao.find(id);
+		
+		System.out.println("Suppression du véhicule - " + vehicule.toString());
+		
+		// TODO supprimer ligne du tableau
+		//((AbstractTableModel)table.getModel()).
+		
+		
+		// TODO appel DAO pour delete véhicule
+		//vehiculeDao.delete(vehicule);
 	}
 }

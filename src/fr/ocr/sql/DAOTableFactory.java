@@ -8,6 +8,7 @@ import java.sql.Statement;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 import fr.ocr.ihm.ButtonEditor;
 import fr.ocr.ihm.ButtonRenderer;
@@ -70,7 +71,7 @@ public class DAOTableFactory {
 				nbreLine++;
 			}
 
-			tab = new JTable(data, title);
+			tab = new JTable(new DefaultTableModel(data, title));
 
 			/**
 			 * On affiche les boutons uniquement pour la table véhicule

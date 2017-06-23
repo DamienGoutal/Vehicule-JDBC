@@ -73,6 +73,12 @@ public class MoteurDAO extends DAO<Moteur> {
 					result.getString("CYLINDRE"),
 					result.getDouble("PRIX")
 				);
+				
+				TypeMoteurDAO typeMoteurDao = new TypeMoteurDAO(this.connection);
+				TypeMoteur typeMoteur = typeMoteurDao.find(result.getInt("MOTEUR"));
+				if (typeMoteur != null) {
+					moteur.setType(typeMoteur);
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -98,6 +104,12 @@ public class MoteurDAO extends DAO<Moteur> {
 						result.getString("CYLINDRE"),
 						result.getDouble("PRIX")
 				);
+				
+				TypeMoteurDAO typeMoteurDao = new TypeMoteurDAO(this.connection);
+				TypeMoteur typeMoteur = typeMoteurDao.find(result.getInt("MOTEUR"));
+				if (typeMoteur != null) {
+					moteur.setType(typeMoteur);
+				}
 				
 				moteurs.add(moteur);
 			}
